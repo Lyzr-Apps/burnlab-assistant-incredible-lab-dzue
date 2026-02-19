@@ -7,11 +7,7 @@ import { AgentActivityPanel } from '@/components/AgentActivityPanel'
 import { Button } from '@/components/ui/button'
 import { Switch } from '@/components/ui/switch'
 import { cn } from '@/lib/utils'
-import { IoSend } from 'react-icons/io5'
-import { FiExternalLink, FiAlertCircle, FiRefreshCw } from 'react-icons/fi'
-import { HiOutlineSparkles } from 'react-icons/hi'
-import { BsCircleFill, BsGear, BsLink45Deg } from 'react-icons/bs'
-import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import { Send, ExternalLink, AlertCircle, RefreshCw, Sparkles, Circle, Settings, Link2, Loader2 } from 'lucide-react'
 
 // --- Constants ---
 const AGENT_ID = '6996c85c9c31ef5244578008'
@@ -79,7 +75,7 @@ function formatInline(text: string): React.ReactNode {
             className="text-[hsl(39,99%,50%)] hover:text-[hsl(39,99%,60%)] underline underline-offset-2 transition-colors duration-200 inline-flex items-center gap-1"
           >
             {part}
-            <FiExternalLink className="h-3 w-3 inline-block flex-shrink-0" />
+            <ExternalLink className="h-3 w-3 inline-block flex-shrink-0" />
           </a>
         )
       }
@@ -181,7 +177,7 @@ function TypingIndicator() {
   return (
     <div className="flex items-start gap-3 px-4 py-2">
       <div className="h-8 w-8 rounded-full bg-[hsl(202,91%,41%)] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[hsl(202,91%,41%)]/20">
-        <HiOutlineSparkles className="h-4 w-4 text-white" />
+        <Sparkles className="h-4 w-4 text-white" />
       </div>
       <div className="bg-card border-2 border-border rounded-2xl rounded-tl-sm px-4 py-3 shadow-lg">
         <div className="flex items-center gap-1.5">
@@ -211,13 +207,13 @@ function ChatBubble({ message }: { message: ChatMessage }) {
   return (
     <div className="flex items-start gap-3 px-4 py-1.5">
       <div className="h-8 w-8 rounded-full bg-[hsl(202,91%,41%)] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[hsl(202,91%,41%)]/20 mt-0.5">
-        <HiOutlineSparkles className="h-4 w-4 text-white" />
+        <Sparkles className="h-4 w-4 text-white" />
       </div>
       <div className="max-w-[80%] space-y-3">
         <div className={cn("bg-card border-2 border-border rounded-2xl rounded-tl-sm px-4 py-3 shadow-lg", message.isError && "border-destructive/50")}>
           {message.isError ? (
             <div className="flex items-center gap-2 text-sm text-destructive">
-              <FiAlertCircle className="h-4 w-4 flex-shrink-0" />
+              <AlertCircle className="h-4 w-4 flex-shrink-0" />
               <span>{message.content}</span>
             </div>
           ) : (
@@ -235,7 +231,7 @@ function ChatBubble({ message }: { message: ChatMessage }) {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-[hsl(202,91%,41%)] transition-colors duration-200 bg-secondary/50 rounded-full px-3 py-1 border border-border hover:border-[hsl(202,91%,41%)]/30"
               >
-                <BsLink45Deg className="h-3 w-3" />
+                <Link2 className="h-3 w-3" />
                 <span className="truncate max-w-[200px]">
                   {(() => {
                     try {
@@ -281,7 +277,7 @@ function WelcomeSection({ onChipClick, disabled }: { onChipClick: (chip: string)
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
       <div className="h-16 w-16 rounded-full bg-[hsl(202,91%,41%)] flex items-center justify-center mb-6 shadow-xl shadow-[hsl(202,91%,41%)]/30">
-        <HiOutlineSparkles className="h-8 w-8 text-white" />
+        <Sparkles className="h-8 w-8 text-white" />
       </div>
       <h2 className="text-xl font-bold text-foreground tracking-tight mb-2">Hi! I'm Burnlab's support assistant.</h2>
       <p className="text-muted-foreground text-sm text-center max-w-md leading-relaxed mb-8">
@@ -310,14 +306,14 @@ function AgentInfoFooter({ activeAgentId }: { activeAgentId: string | null }) {
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
           <div className="h-5 w-5 rounded-full bg-[hsl(202,91%,41%)]/20 flex items-center justify-center">
-            <BsGear className="h-3 w-3 text-[hsl(202,91%,41%)]" />
+            <Settings className="h-3 w-3 text-[hsl(202,91%,41%)]" />
           </div>
           <span className="text-xs text-muted-foreground tracking-tight">
             Powered by <span className="font-semibold text-foreground">{AGENT_NAME}</span>
           </span>
         </div>
         <div className="flex items-center gap-1.5">
-          <BsCircleFill className={cn("h-1.5 w-1.5", activeAgentId ? "text-[hsl(202,91%,41%)] animate-pulse" : "text-green-500")} />
+          <Circle className={cn("h-1.5 w-1.5 fill-current", activeAgentId ? "text-[hsl(202,91%,41%)] animate-pulse" : "text-green-500")} />
           <span className="text-xs text-muted-foreground">{activeAgentId ? 'Processing' : 'Online'}</span>
         </div>
       </div>
@@ -339,6 +335,16 @@ export default function Page() {
 
   // Agent activity monitoring
   const agentActivity = useLyzrAgentEvents(sessionId)
+
+  // Stable refs to avoid stale closures
+  const isLoadingRef = useRef(false)
+  const sessionIdRef = useRef<string | null>(null)
+  const agentActivityRef = useRef(agentActivity)
+
+  // Keep refs in sync
+  useEffect(() => { isLoadingRef.current = isLoading }, [isLoading])
+  useEffect(() => { sessionIdRef.current = sessionId }, [sessionId])
+  useEffect(() => { agentActivityRef.current = agentActivity }, [agentActivity])
 
   // Generate session ID on mount
   useEffect(() => {
@@ -366,10 +372,10 @@ export default function Page() {
     ? ['What integrations does Burnlab support?', 'How much does Burnlab cost?', 'Can I try Burnlab for free?']
     : currentChips
 
-  // Send message handler
+  // Send message handler - stable reference using refs
   const sendMessage = useCallback(async (text: string) => {
     const trimmed = text.trim()
-    if (!trimmed || isLoading) return
+    if (!trimmed || isLoadingRef.current) return
 
     // Add user message
     const userMsg: ChatMessage = {
@@ -381,11 +387,11 @@ export default function Page() {
     setInputValue('')
     setIsLoading(true)
     setActiveAgentId(AGENT_ID)
-    agentActivity.setProcessing(true)
+    try { agentActivityRef.current.setProcessing(true) } catch {}
 
     try {
       const result: AIAgentResponse = await callAIAgent(trimmed, AGENT_ID, {
-        session_id: sessionId ?? undefined,
+        session_id: sessionIdRef.current ?? undefined,
       })
 
       if (result.success && result.response) {
@@ -445,9 +451,9 @@ export default function Page() {
     } finally {
       setIsLoading(false)
       setActiveAgentId(null)
-      agentActivity.setProcessing(false)
+      try { agentActivityRef.current.setProcessing(false) } catch {}
     }
-  }, [isLoading, sessionId, agentActivity])
+  }, [])
 
   // Handle chip click
   const handleChipClick = useCallback((chip: string) => {
@@ -464,13 +470,17 @@ export default function Page() {
 
   // Retry last failed message
   const retryLastMessage = useCallback(() => {
-    const lastUserMessage = [...messages].reverse().find((m) => m.role === 'user')
-    if (lastUserMessage) {
-      // Remove the error message
-      setMessages((prev) => prev.filter((m) => !m.isError))
-      sendMessage(lastUserMessage.content)
-    }
-  }, [messages, sendMessage])
+    setMessages((prev) => {
+      const lastUserMessage = [...prev].reverse().find((m) => m.role === 'user')
+      if (lastUserMessage) {
+        const filtered = prev.filter((m) => !m.isError)
+        // Trigger send after state update
+        setTimeout(() => sendMessage(lastUserMessage.content), 0)
+        return filtered
+      }
+      return prev
+    })
+  }, [sendMessage])
 
   const hasMessages = displayedMessages.length > 0
   const lastMessage = displayedMessages[displayedMessages.length - 1]
@@ -482,12 +492,12 @@ export default function Page() {
       <header className="flex items-center justify-between px-5 py-3 border-b-2 border-border bg-card shadow-lg">
         <div className="flex items-center gap-3">
           <div className="h-9 w-9 rounded-full bg-[hsl(202,91%,41%)] flex items-center justify-center shadow-md shadow-[hsl(202,91%,41%)]/20">
-            <HiOutlineSparkles className="h-5 w-5 text-white" />
+            <Sparkles className="h-5 w-5 text-white" />
           </div>
           <div>
             <h1 className="text-base font-bold text-foreground tracking-tight leading-tight">Burnlab Support</h1>
             <div className="flex items-center gap-1.5">
-              <BsCircleFill className="h-1.5 w-1.5 text-green-500" />
+              <Circle className="h-1.5 w-1.5 fill-current text-green-500" />
               <span className="text-xs text-muted-foreground">Online</span>
             </div>
           </div>
@@ -504,7 +514,7 @@ export default function Page() {
       </header>
 
       {/* Chat area */}
-      <div className="flex-1 overflow-y-auto">
+      <div className="flex-1 overflow-y-auto flex flex-col">
         {!hasMessages ? (
           <WelcomeSection onChipClick={handleChipClick} disabled={isLoading} />
         ) : (
@@ -522,7 +532,7 @@ export default function Page() {
                   onClick={retryLastMessage}
                   className="gap-2 text-xs border-2 rounded-full hover:bg-[hsl(202,91%,41%)]/10 hover:border-[hsl(202,91%,41%)]/40 hover:text-[hsl(202,91%,41%)]"
                 >
-                  <FiRefreshCw className="h-3 w-3" />
+                  <RefreshCw className="h-3 w-3" />
                   Try again
                 </Button>
               </div>
@@ -580,9 +590,9 @@ export default function Page() {
             size="icon"
           >
             {isLoading ? (
-              <AiOutlineLoading3Quarters className="h-5 w-5 animate-spin" />
+              <Loader2 className="h-5 w-5 animate-spin" />
             ) : (
-              <IoSend className="h-5 w-5" />
+              <Send className="h-5 w-5" />
             )}
           </Button>
         </div>
