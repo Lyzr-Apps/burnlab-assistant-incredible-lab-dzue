@@ -76,7 +76,7 @@ function formatInline(text: string): React.ReactNode {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-[hsl(24,80%,45%)] hover:text-[hsl(24,80%,55%)] underline underline-offset-2 transition-colors duration-200 inline-flex items-center gap-1"
+            className="text-[hsl(39,99%,50%)] hover:text-[hsl(39,99%,60%)] underline underline-offset-2 transition-colors duration-200 inline-flex items-center gap-1"
           >
             {part}
             <FiExternalLink className="h-3 w-3 inline-block flex-shrink-0" />
@@ -180,7 +180,7 @@ function renderMarkdown(text: string) {
 function TypingIndicator() {
   return (
     <div className="flex items-start gap-3 px-4 py-2">
-      <div className="h-8 w-8 rounded-full bg-[hsl(24,80%,45%)] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[hsl(24,80%,45%)]/20">
+      <div className="h-8 w-8 rounded-full bg-[hsl(202,91%,41%)] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[hsl(202,91%,41%)]/20">
         <HiOutlineSparkles className="h-4 w-4 text-white" />
       </div>
       <div className="bg-card border-2 border-border rounded-2xl rounded-tl-sm px-4 py-3 shadow-lg">
@@ -201,7 +201,7 @@ function ChatBubble({ message }: { message: ChatMessage }) {
   if (isUser) {
     return (
       <div className="flex justify-end px-4 py-1.5">
-        <div className="max-w-[80%] bg-[hsl(24,80%,45%)] text-white rounded-2xl rounded-tr-sm px-4 py-3 shadow-lg shadow-[hsl(24,80%,45%)]/20">
+        <div className="max-w-[80%] bg-[hsl(202,91%,41%)] text-white rounded-2xl rounded-tr-sm px-4 py-3 shadow-lg shadow-[hsl(202,91%,41%)]/20">
           <p className="text-sm leading-relaxed">{message.content}</p>
         </div>
       </div>
@@ -210,7 +210,7 @@ function ChatBubble({ message }: { message: ChatMessage }) {
 
   return (
     <div className="flex items-start gap-3 px-4 py-1.5">
-      <div className="h-8 w-8 rounded-full bg-[hsl(24,80%,45%)] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[hsl(24,80%,45%)]/20 mt-0.5">
+      <div className="h-8 w-8 rounded-full bg-[hsl(202,91%,41%)] flex items-center justify-center flex-shrink-0 shadow-lg shadow-[hsl(202,91%,41%)]/20 mt-0.5">
         <HiOutlineSparkles className="h-4 w-4 text-white" />
       </div>
       <div className="max-w-[80%] space-y-3">
@@ -233,7 +233,7 @@ function ChatBubble({ message }: { message: ChatMessage }) {
                 href={source}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-[hsl(24,80%,45%)] transition-colors duration-200 bg-secondary/50 rounded-full px-3 py-1 border border-border hover:border-[hsl(24,80%,45%)]/30"
+                className="inline-flex items-center gap-1.5 text-xs text-muted-foreground hover:text-[hsl(202,91%,41%)] transition-colors duration-200 bg-secondary/50 rounded-full px-3 py-1 border border-border hover:border-[hsl(202,91%,41%)]/30"
               >
                 <BsLink45Deg className="h-3 w-3" />
                 <span className="truncate max-w-[200px]">
@@ -266,7 +266,7 @@ function SuggestionChips({ chips, onChipClick, disabled }: { chips: string[]; on
             key={`${chip}-${idx}`}
             onClick={() => onChipClick(chip)}
             disabled={disabled}
-            className="flex-shrink-0 px-4 py-2 text-sm rounded-full border-2 border-border bg-secondary/50 text-foreground hover:bg-[hsl(24,80%,45%)]/10 hover:border-[hsl(24,80%,45%)]/40 hover:text-[hsl(24,80%,45%)] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed tracking-tight"
+            className="flex-shrink-0 px-4 py-2 text-sm rounded-full border-2 border-border bg-secondary/50 text-foreground hover:bg-[hsl(202,91%,41%)]/10 hover:border-[hsl(202,91%,41%)]/40 hover:text-[hsl(202,91%,41%)] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed tracking-tight"
           >
             {chip}
           </button>
@@ -280,7 +280,7 @@ function SuggestionChips({ chips, onChipClick, disabled }: { chips: string[]; on
 function WelcomeSection({ onChipClick, disabled }: { onChipClick: (chip: string) => void; disabled: boolean }) {
   return (
     <div className="flex-1 flex flex-col items-center justify-center px-6 py-12">
-      <div className="h-16 w-16 rounded-full bg-[hsl(24,80%,45%)] flex items-center justify-center mb-6 shadow-xl shadow-[hsl(24,80%,45%)]/30">
+      <div className="h-16 w-16 rounded-full bg-[hsl(202,91%,41%)] flex items-center justify-center mb-6 shadow-xl shadow-[hsl(202,91%,41%)]/30">
         <HiOutlineSparkles className="h-8 w-8 text-white" />
       </div>
       <h2 className="text-xl font-bold text-foreground tracking-tight mb-2">Hi! I'm Burnlab's support assistant.</h2>
@@ -293,7 +293,7 @@ function WelcomeSection({ onChipClick, disabled }: { onChipClick: (chip: string)
             key={idx}
             onClick={() => onChipClick(chip)}
             disabled={disabled}
-            className="px-4 py-2.5 text-sm rounded-full border-2 border-border bg-card text-foreground hover:bg-[hsl(24,80%,45%)]/10 hover:border-[hsl(24,80%,45%)]/40 hover:text-[hsl(24,80%,45%)] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md tracking-tight"
+            className="px-4 py-2.5 text-sm rounded-full border-2 border-border bg-card text-foreground hover:bg-[hsl(202,91%,41%)]/10 hover:border-[hsl(202,91%,41%)]/40 hover:text-[hsl(202,91%,41%)] transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md tracking-tight"
           >
             {chip}
           </button>
@@ -309,15 +309,15 @@ function AgentInfoFooter({ activeAgentId }: { activeAgentId: string | null }) {
     <div className="px-4 py-2 border-t-2 border-border bg-card/50">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="h-5 w-5 rounded-full bg-[hsl(24,80%,45%)]/20 flex items-center justify-center">
-            <BsGear className="h-3 w-3 text-[hsl(24,80%,45%)]" />
+          <div className="h-5 w-5 rounded-full bg-[hsl(202,91%,41%)]/20 flex items-center justify-center">
+            <BsGear className="h-3 w-3 text-[hsl(202,91%,41%)]" />
           </div>
           <span className="text-xs text-muted-foreground tracking-tight">
             Powered by <span className="font-semibold text-foreground">{AGENT_NAME}</span>
           </span>
         </div>
         <div className="flex items-center gap-1.5">
-          <BsCircleFill className={cn("h-1.5 w-1.5", activeAgentId ? "text-[hsl(24,80%,45%)] animate-pulse" : "text-green-500")} />
+          <BsCircleFill className={cn("h-1.5 w-1.5", activeAgentId ? "text-[hsl(202,91%,41%)] animate-pulse" : "text-green-500")} />
           <span className="text-xs text-muted-foreground">{activeAgentId ? 'Processing' : 'Online'}</span>
         </div>
       </div>
@@ -481,7 +481,7 @@ export default function Page() {
       {/* Header */}
       <header className="flex items-center justify-between px-5 py-3 border-b-2 border-border bg-card shadow-lg">
         <div className="flex items-center gap-3">
-          <div className="h-9 w-9 rounded-full bg-[hsl(24,80%,45%)] flex items-center justify-center shadow-md shadow-[hsl(24,80%,45%)]/20">
+          <div className="h-9 w-9 rounded-full bg-[hsl(202,91%,41%)] flex items-center justify-center shadow-md shadow-[hsl(202,91%,41%)]/20">
             <HiOutlineSparkles className="h-5 w-5 text-white" />
           </div>
           <div>
@@ -520,7 +520,7 @@ export default function Page() {
                   variant="outline"
                   size="sm"
                   onClick={retryLastMessage}
-                  className="gap-2 text-xs border-2 rounded-full hover:bg-[hsl(24,80%,45%)]/10 hover:border-[hsl(24,80%,45%)]/40 hover:text-[hsl(24,80%,45%)]"
+                  className="gap-2 text-xs border-2 rounded-full hover:bg-[hsl(202,91%,41%)]/10 hover:border-[hsl(202,91%,41%)]/40 hover:text-[hsl(202,91%,41%)]"
                 >
                   <FiRefreshCw className="h-3 w-3" />
                   Try again
@@ -570,13 +570,13 @@ export default function Page() {
               maxLength={500}
               rows={1}
               disabled={isLoading}
-              className="w-full resize-none rounded-2xl border-2 border-border bg-secondary/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[hsl(24,80%,45%)]/50 focus:border-[hsl(24,80%,45%)]/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 tracking-tight leading-relaxed"
+              className="w-full resize-none rounded-2xl border-2 border-border bg-secondary/50 px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-[hsl(202,91%,41%)]/50 focus:border-[hsl(202,91%,41%)]/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all duration-200 tracking-tight leading-relaxed"
             />
           </div>
           <Button
             onClick={() => sendMessage(inputValue)}
             disabled={isLoading || !inputValue.trim()}
-            className="h-11 w-11 rounded-full bg-[hsl(24,80%,45%)] hover:bg-[hsl(24,80%,55%)] text-white shadow-lg shadow-[hsl(24,80%,45%)]/20 transition-all duration-200 disabled:opacity-40 disabled:shadow-none flex-shrink-0"
+            className="h-11 w-11 rounded-full bg-[hsl(202,91%,41%)] hover:bg-[hsl(202,91%,50%)] text-white shadow-lg shadow-[hsl(202,91%,41%)]/20 transition-all duration-200 disabled:opacity-40 disabled:shadow-none flex-shrink-0"
             size="icon"
           >
             {isLoading ? (
