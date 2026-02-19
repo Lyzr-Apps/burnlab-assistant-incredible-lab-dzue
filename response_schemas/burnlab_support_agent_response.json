@@ -1,0 +1,26 @@
+{
+  "agent_name": "Burnlab Support Agent",
+  "agent_id": "6996c85c9c31ef5244578008",
+  "description": "Answers customer queries about Burnlab products, features, pricing, and company info by searching the website knowledge base and supplementing with publicly available information (reviews, press, social media). Embeds relevant hyperlinks in responses and strategically guides users toward booking demos or making purchases.",
+  "agent_type": "json",
+  "accessor": "result",
+  "auto_generated": true,
+  "response_schema": {
+    "answer": "string",
+    "suggested_questions": [
+      "string"
+    ],
+    "sources": [
+      "string"
+    ]
+  },
+  "example_response": {
+    "answer": "The main response text with markdown formatting, embedded hyperlinks, and CTAs",
+    "suggested_questions": [
+      "sample string"
+    ],
+    "sources": [
+      "sample string"
+    ]
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "agents": [
+    {
+      "name": "Burnlab Support Agent",
+      "agent_id": "6996c85c9c31ef5244578008",
+      "type": "single",
+      "has_knowledge_base": true,
+      "rag_id": "6996c82ae12ce168202ced7c",
+      "model": "perplexity/sonar-pro",
+      "provider": "Perplexity"
+    }
+  ],
+  "workflow": "single_agent",
+  "rag_ids": ["6996c82ae12ce168202ced7c"]
+}
